@@ -1,13 +1,13 @@
 package com.example;
 
-public class Market {
+public class Products {
     private String name;
     private Food[] food;
     private Equipment[] equipment;
     private Recipe[] recipe;
     private int marketTime;
 
-    public Market(){
+    public Products(){
     }
 
     public String getName() {

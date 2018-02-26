@@ -22,9 +22,9 @@ public class GameEngine {
     }
 
     public void runGame() {
-        String jsonContent = Simulation.getFileContentsAsString("Market.json");
+        String jsonContent = Simulation.getFileContentsAsString("Products.json");
         Gson gson = new Gson();
-        Market market = gson.fromJson(jsonContent, Market.class);
+        Products market = gson.fromJson(jsonContent, Products.class);
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             if (isMarket) {
@@ -38,7 +38,7 @@ public class GameEngine {
         }
     }
 
-    public String handleUserInputMkt(Market market, Restaurant restaurant, String userInput) {
+    public String handleUserInputMkt(Products market, Restaurant restaurant, String userInput) {
         String userInputLwr = userInput.toLowerCase();
         String userInputTrimmed = userInputLwr.trim();
         String[] userInputArr = userInputTrimmed.split("\\s+", 2);
@@ -78,9 +78,9 @@ public class GameEngine {
                 }
             } else if (userInputArr.length == 2) {
                 if (userInputArr[0].equalsIgnoreCase("inventory")) {
-
+                    return InventoryAndInfo.printInventory(myRestaurant, userInputArr[1]);
                 } else if(userInputArr[0].equalsIgnoreCase("info")){
-
+                    return InventoryAndInfo.printInfo(myRestaurant, userInputArr[1]);
                 } else if(userInputArr[0].equalsIgnoreCase("menu")) {
 
                 }
@@ -88,7 +88,7 @@ public class GameEngine {
 
             }
         } else {
-            return "I don't understand";
+            return "Empty input";
         }
         return "";
     }

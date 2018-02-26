@@ -1,6 +1,8 @@
 package com.example;
 
-public class Recipe {
+import java.util.Arrays;
+
+public class Recipe extends Product{
     private String name;
     private Food[] food;
     private Equipment[] equipment;
@@ -33,5 +35,17 @@ public class Recipe {
 
     public int getTime() {
         return time;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", food=" + Arrays.toString(food) +
+                ", equipment=" + Arrays.toString(equipment) +
+                ", foodPrice=" + foodPrice +
+                ", recipePrice=" + recipePrice +
+                ", time=" + time +
+                '}';
     }
 }

@@ -1,10 +1,11 @@
 package com.example;
 
-public class Food {
+public class Food extends Product{
     private String name;
     private double price;
 
     public Food(){
+        super();
     }
 
     public String getName() {
@@ -13,5 +14,13 @@ public class Food {
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
