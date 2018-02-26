@@ -13,6 +13,10 @@ public class GameEngineTest {
 
     @Before
     public void setUp() throws Exception {
+    }
+
+    @Test
+    public void handleUserInputMkt() {
         double budget = 100.00;
         int popularity = 0;
         List<Food> foodList = new ArrayList<>();
@@ -21,10 +25,6 @@ public class GameEngineTest {
         int time = 0;
         Restaurant myRestaurant = new Restaurant(foodList, equipList, recipeList,
                 budget, popularity, time);
-    }
-
-    @Test
-    public void handleUserInputMkt() {
         GameEngine test = new GameEngine();
         String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
@@ -33,7 +33,7 @@ public class GameEngineTest {
         String output = "{eggs= Price: $1.50, tomatoes= Price: $1.25, bread= Price: $1.00, " +
                 "chicken= Price: $3.50, potatoes= Price: $1.75, onion= Price: $0.50, noodles= " +
                 "Price: $2.00, lettuce= Price: $0.75, water= Price: $0.00, cheese= Price: $1.25}";
-        assertEquals(output, test.handleUserInputMkt(market, userInput));
+        assertEquals(output, test.handleUserInputMkt(market, myRestaurant, userInput));
     }
 
     @Test

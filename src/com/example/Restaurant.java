@@ -21,6 +21,30 @@ public class Restaurant {
         this.time = time;
     }
 
+    public List<Food> getFoodInventory() {
+        return foodInventory;
+    }
+
+    public void setFoodInventory(List<Food> foodInventory) {
+        this.foodInventory = foodInventory;
+    }
+
+    public List<Equipment> getEquipInventory() {
+        return equipInventory;
+    }
+
+    public void setEquipInventory(List<Equipment> equipInventory) {
+        this.equipInventory = equipInventory;
+    }
+
+    public List<Recipe> getRecipeInventory() {
+        return recipeInventory;
+    }
+
+    public void setRecipeInventory(List<Recipe> recipeInventory) {
+        this.recipeInventory = recipeInventory;
+    }
+
     public double getWealth() {
         return wealth;
     }
