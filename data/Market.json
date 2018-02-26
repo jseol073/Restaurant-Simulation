@@ -1,0 +1,200 @@
+{
+    "name": "Walmart",
+    "food": [
+      {
+        "name": "eggs",
+        "price": 1.50
+      },
+      {
+        "name": "bread",
+        "price": 1.00
+      },
+      {
+        "name": "chicken",
+        "price": 3.50
+      },
+      {
+        "name": "potatoes",
+        "price": 1.75
+      },
+      {
+        "name": "cheese",
+        "price": 1.25
+      },
+      {
+        "name": "lettuce",
+        "price": 0.75
+      },
+      {
+        "name": "onion",
+        "price": 0.50
+      },
+      {
+        "name": "water",
+        "price": 0.00
+      },
+      {
+        "name": "tomatoes",
+        "price": 1.25
+      },
+      {
+        "name": "noodles",
+        "price": 2.00
+      }
+    ],
+    "recipe": [
+      {
+        "name": "pizza",
+        "food": [
+          {
+            "name": "bread",
+            "price": 1.00
+          },
+          {
+            "name": "cheese",
+            "price": 1.25
+          },
+          {
+            "name": "tomatoes",
+            "price": 1.25
+          }
+        ],
+        "equipment": [
+          {
+            "name": "oven",
+            "value": 20
+          }
+        ],
+        "foodPrice": 3.75,
+        "recipePrice": 1.25,
+        "time": 20
+      },
+      {
+        "name": "salad",
+        "food": [
+          {
+            "name": "lettuce",
+            "price": 0.75
+          },
+          {
+            "name": "tomatoes",
+            "price": 1.25
+          }
+        ],
+        "foodPrice": 2.50,
+        "recipePrice": 1.00,
+        "time": 10
+      },
+      {
+        "name": "grilled chicken",
+        "food": [
+          {
+            "name": "chicken",
+            "price": 3.50
+          }
+        ],
+        "equipment": [
+          {
+            "name": "stove",
+            "value": 25
+          }
+        ],
+        "foodPrice": 3.00,
+        "recipePrice": 0.75,
+        "time": 15
+      },
+      {
+        "name": "chicken soup",
+        "food": [
+          {
+            "name": "chicken",
+            "price": 3.50
+          },
+          {
+            "name": "water",
+            "price": 0.00
+          },
+          {
+            "name": "noodles",
+            "price": 2.00
+          }
+        ],
+        "equipment": [
+          {
+            "name": "stove",
+            "value": 25
+          }
+        ],
+        "foodPrice": 1.50,
+        "recipePrice": 0.50,
+        "time": 15
+      },
+      {
+        "name": "sandwich",
+        "food": [
+          {
+            "name": "chicken",
+            "price": 3.50
+          },
+          {
+            "name": "bread",
+            "price": 0.00
+          },
+          {
+            "name": "eggs",
+            "price": 1.50
+          },
+          {
+            "name": "cheese",
+            "price": 1.25
+          },
+          {
+            "name": "tomatoes",
+            "price": 1.25
+          }
+        ],
+        "equipment": [
+          {
+            "name": "stove",
+            "value": 25
+          }
+        ],
+        "foodPrice": 6.50,
+        "recipePrice": 2.00,
+        "time": 20
+      },
+      {
+        "name": "fries",
+        "food": [
+          {
+            "name": "potatoes",
+            "price": 1.75
+          }
+        ],
+        "equipment": [
+          {
+            "name": "deep fryer",
+            "value": 30
+          }
+        ],
+        "foodPrice": 0.75,
+        "recipePrice": 0.50,
+        "time": 15
+      }
+    ],
+    "equipment": [
+      {
+        "name": "stove",
+        "value": 25
+      },
+      {
+        "name": "oven",
+        "value": 20
+      },
+      {
+        "name": "deep fryer",
+        "value": 30
+      }
+    ],
+    "marketTime": 60
+}
