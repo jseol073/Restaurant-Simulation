@@ -36,13 +36,19 @@ public class InventoryAndInfoTest {
         double budget = 100.00;
         int popularity = 0;
         List<Food> foodList = new ArrayList<>();
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
+        Gson gson = new Gson();
+        Market market = gson.fromJson(jsonContent, Market.class);
+        Food chicken = market.getFood()[2];
+        foodList.add(chicken);
         List<Equipment> equipList = new ArrayList<>();
         List<Recipe> recipeList = new ArrayList<>();
         int time = 0;
         Restaurant myRestaurant = new Restaurant(foodList, equipList, recipeList,
                 budget, popularity, time);
-        myRestaurant.setFoodInventory(myRestaurant.getFoodInventory().add());
 
         String item = "chicken";
+        String output = "food";
+        assertEquals(output, InventoryAndInfo.printInfo(myRestaurant, item));
     }
 }

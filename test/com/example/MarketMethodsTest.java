@@ -17,24 +17,24 @@ public class MarketMethodsTest {
 
     @Test
     public void handleListEquipTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String type = "equipment";
         String output = "{oven=Price per day: $20, stove=Price per day: $25, deep fryer=Price per day: $30}";
-        assertEquals(output, MarketMethods.handleList(market, type));
+        assertEquals(output, ListAndBuyMethods.handleList(market, type));
     }
 
     @Test
     public void handleListFoodTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String type = "food";
         String output = "{eggs=Price: $1.50, tomatoes=Price: $1.25, bread=Price: $1.00, " +
                 "chicken=Price: $3.50, potatoes=Price: $1.75, onion=Price: $0.50, noodles=Price: $2.00, " +
                 "lettuce=Price: $0.75, water=Price: $0.00, cheese=Price: $1.25}";
-        assertEquals(output, MarketMethods.handleList(market, type));
+        assertEquals(output, ListAndBuyMethods.handleList(market, type));
     }
 
     @Test
@@ -47,60 +47,60 @@ public class MarketMethodsTest {
 
     @Test
     public void getFoodItemTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String itemName = "cheese";
         Food output = market.getFood()[4];
-        assertEquals(output, MarketMethods.getFoodItem(market, itemName));
+        assertEquals(output, ListAndBuyMethods.getFoodItem(market, itemName));
     }
 
     @Test
     public void getEquipmentItemTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String itemName = "stove";
         Equipment output = market.getEquipment()[0];
-        assertEquals(output, MarketMethods.getEquipmentItem(market, itemName));
+        assertEquals(output, ListAndBuyMethods.getEquipmentItem(market, itemName));
     }
 
     @Test
     public void getEquipmentNullTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String itemName = "fdasfsa";
-        assertEquals(null, MarketMethods.getEquipmentItem(market, itemName));
+        assertEquals(null, ListAndBuyMethods.getEquipmentItem(market, itemName));
     }
 
     @Test
     public void isItemValidTrueTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String checkItemName = "grilled chicken";
         boolean output = true;
-        assertEquals(output, MarketMethods.isItemInMarket(market, checkItemName));
+        assertEquals(output, ListAndBuyMethods.isItemInMarket(market, checkItemName));
     }
 
     @Test
     public void isItemValidFalseTest() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String checkItemName = "grilledchicken";
         boolean output = false;
-        assertEquals(output, MarketMethods.isItemInMarket(market, checkItemName));
+        assertEquals(output, ListAndBuyMethods.isItemInMarket(market, checkItemName));
     }
 
     @Test
     public void handleBuyQuantityTest() {
         double budget = 100.00;
         int popularity = 0;
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         List<Food> foodList = new ArrayList<>();
         List<Equipment> equipList = new ArrayList<>();
         List<Recipe> recipeList = new ArrayList<>();
@@ -111,7 +111,7 @@ public class MarketMethodsTest {
         String[] itemAndQuantArr = {"grilled", "chicken", "4"};
         int quantity = 4;
         String output = "You bought 4 grilled chicken";
-        assertEquals(output, MarketMethods.handleBuyQuantity(market, myRestaurant,
+        assertEquals(output, ListAndBuyMethods.handleBuyQuantity(market, myRestaurant,
                 itemAndQuantArr, quantity));
         }
 }

@@ -26,9 +26,9 @@ public class GameEngineTest {
         Restaurant myRestaurant = new Restaurant(foodList, equipList, recipeList,
                 budget, popularity, time);
         GameEngine test = new GameEngine();
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         String userInput = "list food";
         String output = "{eggs= Price: $1.50, tomatoes= Price: $1.25, bread= Price: $1.00, " +
                 "chicken= Price: $3.50, potatoes= Price: $1.75, onion= Price: $0.50, noodles= " +

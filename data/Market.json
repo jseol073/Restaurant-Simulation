@@ -81,6 +81,12 @@
             "price": 1.25
           }
         ],
+        "equipment": [
+          {
+            "name": "refrigerator",
+            "value": 40
+          }
+        ],
         "foodPrice": 2.50,
         "recipePrice": 1.00,
         "time": 10
@@ -194,6 +200,10 @@
       {
         "name": "deep fryer",
         "value": 30
+      },
+      {
+        "name": "refrigerator",
+        "value": 40
       }
     ],
     "marketTime": 60

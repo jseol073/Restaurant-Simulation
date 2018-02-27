@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.Arrays;
 
-public class Recipe extends Product{
+public class Recipe{
     private String name;
     private Food[] food;
     private Equipment[] equipment;

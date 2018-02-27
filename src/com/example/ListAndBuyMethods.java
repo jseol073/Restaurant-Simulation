@@ -3,11 +3,12 @@ package com.example;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MarketMethods {
+public class ListAndBuyMethods {
     private static final String FOOD = "food";
     private static final String EQUIPMENT = "equipment";
     private static final String RECIPES = "recipes";
     private static final int DEFAULT_QUANTITY = 1;
+    private static final String NO_MONEY = "You do not have enough money.";
 
     /**
      *
@@ -15,7 +16,7 @@ public class MarketMethods {
      * @param type
      * @return
      */
-    public static String handleList(Products market, String type) {
+    public static String handleList(Market market, String type) {
         Map<String, String> foodMap = new HashMap<>();
         Map<String, String> equipMap = new HashMap<>();
         Map<String, String> recipeMap = new HashMap<>();
@@ -51,7 +52,7 @@ public class MarketMethods {
      * @param itemAndQuant
      * @return
      */
-    public static String handleBuy(Products market, Restaurant restaurant, String itemAndQuant) {
+    public static String handleBuy(Market market, Restaurant restaurant, String itemAndQuant) {
         String[] itemAndQuantArr = itemAndQuant.split("\\s+");
         if (itemAndQuantArr[itemAndQuantArr.length - 1].matches(".*\\d+.*")) {
             if (itemAndQuantArr.length <= 3) {
@@ -80,7 +81,7 @@ public class MarketMethods {
         return "";
     }
 
-    public static String handleBuyQuantity(Products market, Restaurant restaurant,
+    public static String handleBuyQuantity(Market market, Restaurant restaurant,
                                            String[] itemAndQuantArr, int quantity) {
         if (itemAndQuantArr.length == 2) {
             return buyItem(market, itemAndQuantArr[0], restaurant, quantity);
@@ -103,7 +104,7 @@ public class MarketMethods {
      * @param quantity
      * @return
      */
-    public static String buyItem(Products market, String itemName, Restaurant restaurant, int quantity) {
+    public static String buyItem(Market market, String itemName, Restaurant restaurant, int quantity) {
         Food foodToBuy;
         Equipment equipToBuy;
         Recipe recipeToBuy;
@@ -120,7 +121,7 @@ public class MarketMethods {
                 restaurant.setWealth(restaurant.getWealth() - price);
                 return String.format("You bought %d %s (food)", quantity, foodToBuy.getName());
             } else {
-                return "You do not have enough money";
+                return NO_MONEY;
             }
 
         } else if (getEquipmentItem(market, itemName) != null) {
@@ -134,7 +135,7 @@ public class MarketMethods {
                 restaurant.setWealth(restaurant.getWealth() - price);
                 return String.format("You bought %d %s (equipment)", quantity, equipToBuy.getName());
             } else {
-                return "You do not have enough money";
+                return NO_MONEY;
             }
 
         } else if (getRecipeItem(market, itemName) != null) {
@@ -148,7 +149,7 @@ public class MarketMethods {
                 restaurant.setWealth(restaurant.getWealth() - price);
                 return String.format("You bought %d %s (recipe)", quantity, recipeToBuy.getName());
             } else {
-                return "You do not have enough money";
+                return NO_MONEY;
             }
         }
         return String.format("%s is not in the market", itemName);
@@ -160,7 +161,7 @@ public class MarketMethods {
      * @param itemName
      * @return
      */
-    public static Food getFoodItem(Products market, String itemName) {
+    public static Food getFoodItem(Market market, String itemName) {
         Food[] foodArr = market.getFood();
         for (int i = 0; i < foodArr.length; i++) {
             if (itemName.equalsIgnoreCase(foodArr[i].getName())) {
@@ -176,7 +177,7 @@ public class MarketMethods {
      * @param itemName
      * @return
      */
-    public static Equipment getEquipmentItem(Products market, String itemName) {
+    public static Equipment getEquipmentItem(Market market, String itemName) {
         Equipment[] equipArr = market.getEquipment();
         for (int i = 0; i < equipArr.length; i++) {
             if (itemName.equalsIgnoreCase(equipArr[i].getName())) {
@@ -192,7 +193,7 @@ public class MarketMethods {
      * @param itemName
      * @return
      */
-    public static Recipe getRecipeItem(Products market, String itemName) {
+    public static Recipe getRecipeItem(Market market, String itemName) {
         Recipe[] recipeArr = market.getRecipe();
         for (int i = 0; i < recipeArr.length; i++) {
             if (itemName.equalsIgnoreCase(recipeArr[i].getName())) {
@@ -208,7 +209,7 @@ public class MarketMethods {
      * @param checkItemName
      * @return
      */
-    public static boolean isItemInMarket(Products market, String checkItemName) {
+    public static boolean isItemInMarket(Market market, String checkItemName) {
         if (getRecipeItem(market, checkItemName) != null) {
             return true;
         } else if (getEquipmentItem(market, checkItemName) != null) {

@@ -22,9 +22,9 @@ public class GameEngine {
     }
 
     public void runGame() {
-        String jsonContent = Simulation.getFileContentsAsString("Products.json");
+        String jsonContent = Simulation.getFileContentsAsString("Market.json");
         Gson gson = new Gson();
-        Products market = gson.fromJson(jsonContent, Products.class);
+        Market market = gson.fromJson(jsonContent, Market.class);
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             if (isMarket) {
@@ -38,7 +38,7 @@ public class GameEngine {
         }
     }
 
-    public String handleUserInputMkt(Products market, Restaurant restaurant, String userInput) {
+    public String handleUserInputMkt(Market market, Restaurant restaurant, String userInput) {
         String userInputLwr = userInput.toLowerCase();
         String userInputTrimmed = userInputLwr.trim();
         String[] userInputArr = userInputTrimmed.split("\\s+", 2);
@@ -50,12 +50,11 @@ public class GameEngine {
                 }
             } else if (userInputArr.length == 2) {
                 if (userInputArr[0].equalsIgnoreCase("list")) {
-                    System.out.println("correct");
-                    return MarketMethods.handleList(market, userInputArr[1]);
+                    return ListAndBuyMethods.handleList(market, userInputArr[1]);
                 } else if (userInputArr[0].equalsIgnoreCase("buy")) {
-                    return MarketMethods.handleBuy(market, restaurant, userInputArr[1]);
+                    return ListAndBuyMethods.handleBuy(market, restaurant, userInputArr[1]);
                 } else if (userInputArr[0].equalsIgnoreCase("sell")) {
-
+                    return SellMethods.handleSell(market, restaurant, userInputArr[1]);
                 }
             }
         }
@@ -65,7 +64,7 @@ public class GameEngine {
     public String handleUserInput(String userInput) {
         String userInputLwr = userInput.toLowerCase();
         String userInputTrimmed = userInputLwr.trim();
-        String[] userInputArr = userInputTrimmed.split("\\s+");
+        String[] userInputArr = userInputTrimmed.split("\\s+", 2);
         if (!userInputTrimmed.isEmpty()) {
             if (userInputArr.length == 1) {
                 if (userInputArr[0].equalsIgnoreCase(WEALTH)) {
@@ -83,9 +82,9 @@ public class GameEngine {
                     return InventoryAndInfo.printInfo(myRestaurant, userInputArr[1]);
                 } else if(userInputArr[0].equalsIgnoreCase("menu")) {
 
+                } else if(userInputArr[0].equalsIgnoreCase("cook")) {
+                    return CookMethods.handleCook(myRestaurant, userInputArr[1]);
                 }
-            } else if (userInputArr.length == 3) {
-
             }
         } else {
             return "Empty input";
