@@ -4,7 +4,7 @@ public class SellMethods {
     private static final double SELLING_CONSTANT = 1.5;
 
     /**
-     * 
+     *
      * @param market
      * @param restaurant
      * @param itemAndQuant
@@ -62,7 +62,7 @@ public class SellMethods {
                     restaurant.getFoodInventory().remove(foodToSell);
                 }
             } else {
-                return String.format("No more %s left", itemName);
+                return String.format("No more %s left in your inventory", itemName);
             }
             restaurant.setWealth(restaurant.getWealth() + price);
             return String.format("You sold %d %s (food)", quantity, foodToSell.getName());
@@ -77,7 +77,7 @@ public class SellMethods {
                     restaurant.getEquipInventory().remove(equipToSell);
                 }
             } else {
-                return String.format("No more %s left", itemName);
+                return String.format("No more %s left in your inventory", itemName);
             }
             restaurant.setWealth(restaurant.getWealth() + price);
             return String.format("You sold %d %s (equipment)", quantity, equipToSell.getName());
@@ -91,7 +91,7 @@ public class SellMethods {
                     restaurant.getRecipeInventory().remove(recipeToSell);
                 }
             } else {
-                return String.format("No more %s left", itemName);
+                return String.format("No more %s left in your inventory", itemName);
             }
             restaurant.setWealth(restaurant.getWealth() + price);
             return String.format("You sold %d %s (recipe)", quantity, recipeToSell.getName());

@@ -6,8 +6,9 @@ public class Food{
     private String name;
     private double price;
 
-    public Food(){
-        super();
+    public Food(String n, double p){
+        this.name = n;
+        this.price = p;
     }
 
     public String getName() {

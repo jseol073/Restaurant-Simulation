@@ -7,9 +7,12 @@ public class Restaurant {
     private double wealth;
     private int popularity;
     private int time;
+    private int day;
     private List<Food> foodInventory = new ArrayList<>();
     private List<Equipment> equipInventory = new ArrayList<>();
     private List<Recipe> recipeInventory = new ArrayList<>();
+    private List<Food> cookedFoodList = new ArrayList<>();
+    private List<Food> menuList = new ArrayList<>();
 
     public Restaurant(List<Food> food, List<Equipment> equipment, List<Recipe> recipe,
                       double wealth, int popularity, int time) {
@@ -19,6 +22,22 @@ public class Restaurant {
         this.wealth = wealth;
         this.popularity = popularity;
         this.time = time;
+    }
+
+    public List<Food> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Food> menuList) {
+        this.menuList = menuList;
+    }
+
+    public List<Food> getCookedFoodList() {
+        return cookedFoodList;
+    }
+
+    public void setCookedFoodList(List<Food> cookedFoodList) {
+        this.cookedFoodList = cookedFoodList;
     }
 
     public List<Food> getFoodInventory() {
@@ -70,13 +89,9 @@ public class Restaurant {
     }
 
     public String realTime() {
-        String amPm = "am";
         int hour = this.getTime() / 60;
         int min = this.getTime() % 60;
         int realHour = 6 + hour;
-        if (realHour >= 12) {
-            amPm = "pm";
-        }
-        return String.format("%d:%d %s", hour, min, amPm);
+        return String.format("%d:%d", hour, min);
     }
 }

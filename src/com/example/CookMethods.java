@@ -52,8 +52,15 @@ public class CookMethods {
 
                        List<Food> newFoodInventory = removeIngredients(restaurant, currRecipe);
                        restaurant.setFoodInventory(newFoodInventory);
-                       return String.format("You made %s", currRecipe.getName());
 
+
+                       Food cookedFood = MenuMethods.recipeToFood(currRecipe);
+                       List<Food> cookedFoodList = new ArrayList<>();
+                       cookedFoodList.add(cookedFood);
+                       restaurant.setCookedFoodList(cookedFoodList);
+
+
+                       return String.format("You made %s", currRecipe.getName());
                    }
                 } else {
                     return "food inventory issue";

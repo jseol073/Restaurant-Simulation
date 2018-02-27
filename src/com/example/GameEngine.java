@@ -33,7 +33,6 @@ public class GameEngine {
             } else {
                 String userInput = sc.nextLine();
                 System.out.println(handleUserInput(userInput));
-
             }
         }
     }
@@ -58,7 +57,7 @@ public class GameEngine {
                 }
             }
         }
-        return "";
+        return String.format("I don't understand %s", userInputTrimmed);
     }
 
     public String handleUserInput(String userInput) {
@@ -81,14 +80,16 @@ public class GameEngine {
                 } else if(userInputArr[0].equalsIgnoreCase("info")){
                     return InventoryAndInfo.printInfo(myRestaurant, userInputArr[1]);
                 } else if(userInputArr[0].equalsIgnoreCase("menu")) {
-
+                    return MenuMethods.handleMenuOptions(myRestaurant, userInputArr[1]);
                 } else if(userInputArr[0].equalsIgnoreCase("cook")) {
                     return CookMethods.handleCook(myRestaurant, userInputArr[1]);
+                } else if(userInputArr[0].equalsIgnoreCase("pass")) {
+                    return TimeMethods.passTime(myRestaurant, userInputArr[1]);
                 }
             }
         } else {
             return "Empty input";
         }
-        return "";
+        return String.format("I don't understand %s", userInputTrimmed);
     }
 }
