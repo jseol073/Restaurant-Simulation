@@ -1,7 +1,5 @@
 package com.example;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +9,10 @@ public class InventoryAndInfo {
     private static final String RECIPE = "recipe";
 
     /**
-     *
+     * Uses restaurant object to prints the names each type of inventory by using an ArrayList
      * @param restaurant
-     * @param type
-     * @return
+     * @param type, refers to type of item (food, equipment, or recipe)
+     * @return String of the names of whichever type
      */
     public static String printInventory(Restaurant restaurant, String type) {
         List<String> names = new ArrayList<>();
@@ -47,10 +45,22 @@ public class InventoryAndInfo {
             } else {
                 return "Recipe inventory is empty";
             }
+        } else if (type.equalsIgnoreCase("dishes")) {
+            if (!restaurant.getEntreeList().isEmpty()) {
+                return restaurant.getEntreeList().toString();
+            } else {
+                return "Dishes inventory is empty";
+            }
         }
         return String.format("%s is not a valid type", type);
     }
 
+    /**
+     * Prints the type of the item
+     * @param restaurant
+     * @param item, possibly a name of a valid item type
+     * @return string which represents the type (food, recipe, equipment)
+     */
     public static String printInfo(Restaurant restaurant, String item) {
         if (getFood(restaurant, item) != null) {
             return FOOD;
@@ -59,32 +69,16 @@ public class InventoryAndInfo {
         } else if (getRecipe(restaurant, item) != null) {
             return RECIPE;
         }
-        return String.format("Restaurant does not have %s", item);
+        return String.format("Restaurant does not have '%s'", item);
     }
 
-//    public static boolean isItemInRestaurant(Restaurant restaurant, String checkItem) {
-//        if (!restaurant.getFoodInventory().isEmpty()) {
-//            for (int fIndex = 0; fIndex < restaurant.getFoodInventory().size(); fIndex++) {
-//                if (restaurant.getFoodInventory().get(fIndex).getName().equalsIgnoreCase(checkItem)) {
-//                    return true;
-//                }
-//            }
-//        } else if (!restaurant.getEquipInventory().isEmpty()) {
-//            for (int eIndex = 0; eIndex < restaurant.getEquipInventory().size(); eIndex++) {
-//                if (restaurant.getEquipInventory().get(eIndex).getName().equalsIgnoreCase(checkItem)) {
-//                    return true;
-//                }
-//            }
-//        } else if (!restaurant.getRecipeInventory().isEmpty()) {
-//            for (int rIndex = 0; rIndex < restaurant.getRecipeInventory().size(); rIndex++) {
-//                if (restaurant.getRecipeInventory().get(rIndex).getName().equalsIgnoreCase(checkItem)) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
+    /**
+     * takes a string and checks if it is in the Restaurant object
+     * if it is, returns that food object
+     * @param restaurant
+     * @param checkItem, could be the name of a Food object
+     * @return a Food object that matches the food name. Returns null if it does not
+     */
     public static Food getFood(Restaurant restaurant, String checkItem) {
         if (!restaurant.getFoodInventory().isEmpty()) {
             List<Food> foodList = restaurant.getFoodInventory();
@@ -97,6 +91,13 @@ public class InventoryAndInfo {
         return null;
     }
 
+    /**
+     * takes a string and checks if it is in the Restaurant object
+     * if it is, returns that equipment object
+     * @param restaurant
+     * @param checkItem, could be the name of an Equipment object
+     * @return a equipment object that matches the equipment name. Returns null if it does not
+     */
     public static Equipment getEquipment(Restaurant restaurant, String checkItem) {
         if (!restaurant.getEquipInventory().isEmpty()) {
             List<Equipment> equipList = restaurant.getEquipInventory();
@@ -109,6 +110,13 @@ public class InventoryAndInfo {
         return null;
     }
 
+    /**
+     * takes a string and checks if it is in the Restaurant object
+     * if it is, returns that Recipe object
+     * @param restaurant
+     * @param checkItem, could be the name of an Recipe object
+     * @return a equipment object that matches the Recipe name. Returns null if it does not
+     */
     public static Recipe getRecipe(Restaurant restaurant, String checkItem) {
         if (!restaurant.getRecipeInventory().isEmpty()) {
             List<Recipe> recipeList = restaurant.getRecipeInventory();

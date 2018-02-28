@@ -35,7 +35,7 @@ public class MenuMethodsTest {
         Restaurant myRestaurant = new Restaurant(foodList, equipList, recipeList,
                 budget, popularity, time);
 
-        assertEquals("You don't have any cooked food", MenuMethods.listMenu(myRestaurant));
+        assertEquals("You don't have anything in your menu", MenuMethods.listMenu(myRestaurant));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class MenuMethodsTest {
         myRestaurant.setMenuList(cookedFoodList);
 
         assertEquals("You have removed pizza from the Menu" ,
-                MenuMethods.removeDish(myRestaurant, "pizza"));
+                MenuMethods.removeEntree(myRestaurant, "pizza"));
 
     }
 
@@ -90,9 +90,9 @@ public class MenuMethodsTest {
                 budget, popularity, time);
         List<Food> cookedFoodList = new ArrayList<>();
         cookedFoodList.add(new Food("pizza", 5.25));
-        myRestaurant.setCookedFoodList(cookedFoodList);
+        myRestaurant.setEntreeList(cookedFoodList);
 
         assertEquals("You have added pizza to the Menu" ,
-                MenuMethods.addDish(myRestaurant, "pizza"));
+                MenuMethods.addEntree(myRestaurant, "pizza"));
     }
 }

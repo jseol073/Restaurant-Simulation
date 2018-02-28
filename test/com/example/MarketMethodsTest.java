@@ -10,9 +10,19 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class MarketMethodsTest {
+    private static Restaurant myRestaurant;
+
 
     @Before
     public void setUp() throws Exception {
+        double budget = 100.00;
+        int popularity = 0;
+        List<Food> foodList = new ArrayList<>();
+        List<Equipment> equipList = new ArrayList<>();
+        List<Recipe> recipeList = new ArrayList<>();
+        int time = 0;
+        myRestaurant = new Restaurant(foodList, equipList, recipeList,
+                budget, popularity, time);
     }
 
     @Test
@@ -21,7 +31,8 @@ public class MarketMethodsTest {
         Gson gson = new Gson();
         Market market = gson.fromJson(jsonContent, Market.class);
         String type = "equipment";
-        String output = "{oven=Price per day: $20, stove=Price per day: $25, deep fryer=Price per day: $30}";
+        String output = "{oven= Price per day: $20, stove= Price per day: $25," +
+                " deep fryer= Price per day: $30, refrigerator= Price per day: $40}";
         assertEquals(output, ListAndBuyMethods.handleList(market, type));
     }
 
@@ -31,9 +42,9 @@ public class MarketMethodsTest {
         Gson gson = new Gson();
         Market market = gson.fromJson(jsonContent, Market.class);
         String type = "food";
-        String output = "{eggs=Price: $1.50, tomatoes=Price: $1.25, bread=Price: $1.00, " +
-                "chicken=Price: $3.50, potatoes=Price: $1.75, onion=Price: $0.50, noodles=Price: $2.00, " +
-                "lettuce=Price: $0.75, water=Price: $0.00, cheese=Price: $1.25}";
+        String output = "{eggs= Price: $1.50, tomatoes= Price: $1.25, bread= Price: $1.00, " +
+                "chicken= Price: $3.50, potatoes= Price: $1.75, onion= Price: $0.50, noodles= Price: $2.00, " +
+                "lettuce= Price: $0.75, water= Price: $0.00, cheese= Price: $1.25}";
         assertEquals(output, ListAndBuyMethods.handleList(market, type));
     }
 
@@ -110,7 +121,7 @@ public class MarketMethodsTest {
 
         String[] itemAndQuantArr = {"grilled", "chicken", "4"};
         int quantity = 4;
-        String output = "You bought 4 grilled chicken";
+        String output = "You bought 4 grilled chicken (recipe)";
         assertEquals(output, ListAndBuyMethods.handleBuyQuantity(market, myRestaurant,
                 itemAndQuantArr, quantity));
         }

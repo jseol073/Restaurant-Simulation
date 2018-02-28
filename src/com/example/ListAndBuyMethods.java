@@ -6,15 +6,15 @@ import java.util.Map;
 public class ListAndBuyMethods {
     private static final String FOOD = "food";
     private static final String EQUIPMENT = "equipment";
-    private static final String RECIPES = "recipes";
+    private static final String RECIPE = "recipe";
     private static final int DEFAULT_QUANTITY = 1;
     private static final String NO_MONEY = "You do not have enough money.";
 
     /**
-     *
+     * Handles the user's input for list commands
      * @param market
-     * @param type
-     * @return
+     * @param type, a string that could match with one of the types (food, equipment, recipe)
+     * @return name and price of a food, equipment, or recipe type
      */
     public static String handleList(Market market, String type) {
         Map<String, String> foodMap = new HashMap<>();
@@ -35,7 +35,7 @@ public class ListAndBuyMethods {
             }
             return equipMap.toString();
 
-        } else if (type.equalsIgnoreCase(RECIPES)) {
+        } else if (type.equalsIgnoreCase(RECIPE)) {
             for (int rIndex = 0; rIndex < market.getRecipe().length; rIndex++) {
                 recipeMap.put(market.getRecipe()[rIndex].getName(),
                         String.format(" Price: $%.2f", market.getRecipe()[rIndex].getRecipePrice()));
@@ -46,11 +46,11 @@ public class ListAndBuyMethods {
     }
 
     /**
-     *
-     * @param market
-     * @param restaurant
-     * @param itemAndQuant
-     * @return
+     * Handles the user's command when buying an item from the market
+     * @param market, the market json object
+     * @param restaurant, restaurant object
+     * @param itemAndQuant, string that may contain the item and how many items
+     * @return calls helper methods handleBuyQuantity, buyItem,
      */
     public static String handleBuy(Market market, Restaurant restaurant, String itemAndQuant) {
         String[] itemAndQuantArr = itemAndQuant.split("\\s+");
@@ -65,7 +65,6 @@ public class ListAndBuyMethods {
             } else {
                 return "You might be adding a word";
             }
-
         } else {
             if (itemAndQuantArr.length == 1) {
                 return buyItem(market, itemAndQuantArr[0], restaurant, DEFAULT_QUANTITY);
@@ -78,15 +77,23 @@ public class ListAndBuyMethods {
                 }
             }
         }
-        return "";
+        return "I don't understand";
     }
 
+    /**
+     * Handles buying actions when there is a quantity specified
+     * @param market
+     * @param restaurant
+     * @param itemArr
+     * @param quantity
+     * @return calls buyItem method
+     */
     public static String handleBuyQuantity(Market market, Restaurant restaurant,
-                                           String[] itemAndQuantArr, int quantity) {
-        if (itemAndQuantArr.length == 2) {
-            return buyItem(market, itemAndQuantArr[0], restaurant, quantity);
-        } else if (itemAndQuantArr.length == 3) {
-            String twoWordedItem = itemAndQuantArr[0] + " " + itemAndQuantArr[1];
+                                           String[] itemArr, int quantity) {
+        if (itemArr.length == 2) {
+            return buyItem(market, itemArr[0], restaurant, quantity);
+        } else if (itemArr.length == 3) { //checks for two worded items
+            String twoWordedItem = itemArr[0] + " " + itemArr[1];
             if (isItemInMarket(market, twoWordedItem)) {
                 return buyItem(market, twoWordedItem, restaurant, quantity);
             } else {
@@ -97,12 +104,12 @@ public class ListAndBuyMethods {
     }
 
     /**
-     *
+     * Completes buying actions which also deducts money from the restaurant
      * @param market
-     * @param itemName
+     * @param itemName, could be a food, equipment, or recipe
      * @param restaurant
-     * @param quantity
-     * @return
+     * @param quantity, quantity items
+     * @return A string to show user that they bought an particular item with a quantity as specified
      */
     public static String buyItem(Market market, String itemName, Restaurant restaurant, int quantity) {
         Food foodToBuy;
@@ -114,7 +121,7 @@ public class ListAndBuyMethods {
             foodToBuy = getFoodItem(market, itemName);
             price = quantity * foodToBuy.getPrice();
 
-            if (restaurant.getWealth() - price >= 0) {
+            if (restaurant.getWealth() - price > 0) {
                 for (int qIndex = 0; qIndex < quantity; qIndex++) {
                     restaurant.getFoodInventory().add(foodToBuy);
                 }
@@ -128,7 +135,7 @@ public class ListAndBuyMethods {
             equipToBuy = getEquipmentItem(market, itemName);
             price = quantity * equipToBuy.getValue();
 
-            if (restaurant.getWealth() - price >= 0) {
+            if (restaurant.getWealth() - price > 0) {
                 for (int qIndex = 0; qIndex < quantity; qIndex++) {
                     restaurant.getEquipInventory().add(equipToBuy);
                 }
@@ -142,7 +149,7 @@ public class ListAndBuyMethods {
             recipeToBuy = getRecipeItem(market, itemName);
             price = quantity * recipeToBuy.getRecipePrice();
 
-            if (restaurant.getWealth() - price >= 0) {
+            if (restaurant.getWealth() - price > 0) {
                 for (int qIndex = 0; qIndex < quantity; qIndex++) {
                     restaurant.getRecipeInventory().add(recipeToBuy);
                 }
@@ -156,10 +163,11 @@ public class ListAndBuyMethods {
     }
 
     /**
-     *
+     * takes a string and checks if it is in the market json object
+     * if it is, returns that food object
      * @param market
-     * @param itemName
-     * @return
+     * @param itemName, could be the name of a food object
+     * @return a Food object that matches the food name. Returns null if it does not
      */
     public static Food getFoodItem(Market market, String itemName) {
         Food[] foodArr = market.getFood();
@@ -172,10 +180,11 @@ public class ListAndBuyMethods {
     }
 
     /**
-     *
+     * takes a string and checks if it is in the market json object
+     * if it is, returns that equipment object
      * @param market
-     * @param itemName
-     * @return
+     * @param itemName, could be the name of an equipment object
+     * @return a equipment object that matches the equipment name. Returns null if it does not
      */
     public static Equipment getEquipmentItem(Market market, String itemName) {
         Equipment[] equipArr = market.getEquipment();
@@ -188,10 +197,11 @@ public class ListAndBuyMethods {
     }
 
     /**
-     *
+     * takes a string and checks if it is in the market json object
+     * if it is, returns that recipe object
      * @param market
-     * @param itemName
-     * @return
+     * @param itemName, could be the name of a recipe object
+     * @return a Food object that matches the recipe name. Returns null if it does not
      */
     public static Recipe getRecipeItem(Market market, String itemName) {
         Recipe[] recipeArr = market.getRecipe();
@@ -204,10 +214,11 @@ public class ListAndBuyMethods {
     }
 
     /**
-     *
+     * takes a string and checks if it is in the market json object
+     * if it is, returns that food object
      * @param market
-     * @param checkItemName
-     * @return
+     * @param checkItemName, could be the name of a type of item
+     * @return a Food object that matches the item name. Returns null if it is not
      */
     public static boolean isItemInMarket(Market market, String checkItemName) {
         if (getRecipeItem(market, checkItemName) != null) {
