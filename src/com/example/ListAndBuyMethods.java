@@ -9,6 +9,7 @@ public class ListAndBuyMethods {
     private static final String RECIPE = "recipe";
     private static final int DEFAULT_QUANTITY = 1;
     private static final String NO_MONEY = "You do not have enough money.";
+    private static final String INVALID_INPUT = "I don't understand";
 
     /**
      * Handles the user's input for list commands
@@ -77,7 +78,7 @@ public class ListAndBuyMethods {
                 }
             }
         }
-        return "I don't understand";
+        return INVALID_INPUT;
     }
 
     /**
@@ -100,7 +101,7 @@ public class ListAndBuyMethods {
                 return String.format("%s is not a valid item", twoWordedItem);
             }
         }
-        return "";
+        return INVALID_INPUT;
     }
 
     /**

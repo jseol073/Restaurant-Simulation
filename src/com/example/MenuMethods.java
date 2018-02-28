@@ -4,6 +4,7 @@ import java.util.List;
 
 public class MenuMethods {
     private static final double MENU_SELLING_CONSTANT = 1.5;
+    private static final String INVALID_INPUT = "I don't understand";
 
     /**
      * When the user's first word is menu and then this method handles the words after that
@@ -24,7 +25,7 @@ public class MenuMethods {
                 return handleRemoveMenu(restaurant, menuOptionsArr[1]);
             }
         }
-        return "I don't understand";
+        return INVALID_INPUT;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CookMethods {
     private static List<Food> dishList = new ArrayList<>();
+    private static final String INVALID_INPUT = "I don't understand";
 
     /**
      * handles the user's input on what to cook
@@ -20,7 +21,7 @@ public class CookMethods {
             String twoWordedItem = foodAndQuantArr[0] + " " + foodAndQuantArr[1];
             return cookFood(restaurant, twoWordedItem);
         }
-        return "I don't understand";
+        return INVALID_INPUT;
     }
 
     /**

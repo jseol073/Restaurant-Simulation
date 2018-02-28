@@ -3,6 +3,7 @@ package com.example;
 public class SellMethods {
     private static final double FOOD_CONSTANT = 0.8;
     private static final double EQUIP_RECIPE_CONSTANT = 0.5;
+    private static final String INVALID_INPUT = "I don't understand";
 
     /**
      * Handles the user's command when selling an item from the market
@@ -39,7 +40,7 @@ public class SellMethods {
                 }
             }
         }
-        return "";
+        return INVALID_INPUT;
     }
 
     /**
@@ -123,6 +124,6 @@ public class SellMethods {
                 return String.format("%s is not a valid item", twoWordedItem);
             }
         }
-        return "";
+        return INVALID_INPUT;
     }
 }
